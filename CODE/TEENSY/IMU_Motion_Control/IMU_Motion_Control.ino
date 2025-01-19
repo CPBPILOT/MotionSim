@@ -9,14 +9,7 @@
 #define PASSTHROUGH_PIN 16
 #define LED_PIN 6
 #define NUM_LEDS 5
-//#define YPOT A0
-//#define XPOT A1
-//#define red_pin 6
-//#define green_pin 7
-//#define blue_pin 8
-//#define switch_pin 9
-//#define switch1_pin 14
-//#define switch2_pin 15
+
 
 // Define the maximum speed and acceleration
 #define MAX_SPEED 10000.0 // Steps per second
@@ -56,7 +49,7 @@ int y_zero=-4;
 
 int x_pos=0;
 int y_pos=0;
-int steps_per_rev=3200;
+int steps_per_rev=1600;
 
 int roll_raw;
 int pitch_raw;
