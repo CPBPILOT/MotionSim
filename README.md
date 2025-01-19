@@ -2,6 +2,8 @@
 
 This project provides a comprehensive guide to building a low-cost DIY motion simulator for flying RC planes and simulator games. Combining woodworking and mechatronics, it offers an affordable alternative to commercial options. The documentation includes CAD models, detailed assembly instructions, and software setup.
 
+Support This Project: [Patreon](https://patreon.com/MichaelRechtin)
+
 ## Features
 - Compatible with flight simulation games like Microsoft Flight Simulator 2020/2024 and WarThunder.
 - Support for RC planes using ArduPilot.
