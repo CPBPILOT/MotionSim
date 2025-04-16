@@ -37,7 +37,7 @@ while True:
             pitch = math.atan2(accel_x, accel_y)
             roll = math.atan2(accel_z, accel_y)
             # Display pitch and roll
-            #print(f"Accel X: {accel_x:.4f} FPSS, Accel Y: {accel_y:.4f} FPSS, Accel Z: {accel_z:.4f} FPSS, Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
+            print(f"Accel X: {accel_x:.4f} FPSS, Accel Y: {accel_y:.4f} FPSS, Accel Z: {accel_z:.4f} FPSS, Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
         else:  
             pitch = aq.get("PLANE_PITCH_DEGREES")
             roll = aq.get("PLANE_BANK_DEGREES")
@@ -59,5 +59,8 @@ while True:
         print('Closing')
         break
         
-    except: 
-        next
+    #except: 
+    #    next
+    except Exception as e:
+        print("Error:", e)
+        continue
