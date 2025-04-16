@@ -28,26 +28,27 @@ accel_mode = 1
 while True:
     try:
         # Retrieve pitch and roll data
-        if accel_mode = 1 
-          accel_x = aq.get("ACCELERATION_BODY_X") #roll
-          accel_y = aq.get("ACCELERATION_BODY_Y") #vertival
-          accel_z = aq.get("ACCELERATION_BODY_Z") #pitch
-
-          pitch = math.atan(accel_x, accel_y)
-          roll = math.atan(accel_z, accel_y)
-      else  
-          pitch = aq.get("PLANE_PITCH_DEGREES")
-          roll = aq.get("PLANE_BANK_DEGREES")
-        
-        
-        
-        # Display pitch and roll
-        #print(f"Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
+        if accel_mode == 1: 
+            accel_x = aq.get("ACCELERATION_BODY_X") #roll
+            accel_y = aq.get("ACCELERATION_BODY_Y") #vertival
+            accel_z = aq.get("ACCELERATION_BODY_Z") #pitch
+            
+            #result of math.atan is rads which is the same unit as
+            pitch = math.atan2(accel_x, accel_y)
+            roll = math.atan2(accel_z, accel_y)
+            # Display pitch and roll
+            #print(f"Accel X: {accel_x:.4f} FPSS, Accel Y: {accel_y:.4f} FPSS, Accel Z: {accel_z:.4f} FPSS, Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
+        else:  
+            pitch = aq.get("PLANE_PITCH_DEGREES")
+            roll = aq.get("PLANE_BANK_DEGREES")
+            # Display pitch and roll
+            #print(f"Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
 
         # Pause for a short interval to reduce load
         #time.sleep(0.1)
-        vector[0]=roll*(-180/math.pi)
-        vector[1]=pitch*(-180/math.pi)
+        # Convert to degrees and flip sign to match hardware orientation
+        vector[0] = -math.degrees(roll)
+        vector[1] = -math.degrees(pitch)
         vector_str = f"{vector[0]},{vector[1]}\n"
         ser.write(vector_str.encode('utf-8'))
         print(vector)
