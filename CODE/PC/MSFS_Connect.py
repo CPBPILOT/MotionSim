@@ -23,13 +23,23 @@ vector = [0, 0]
 sm = SimConnect()
 # Create a request object to pull data from MSFS
 aq = AircraftRequests(sm, _time=10)
+accel_mode = 1
     
 while True:
     try:
         # Retrieve pitch and roll data
+        if accel_mode = 1 
+          accel_x = aq.get("ACCELERATION_BODY_X") #roll
+          accel_y = aq.get("ACCELERATION_BODY_Y") #vertival
+          accel_z = aq.get("ACCELERATION_BODY_Z") #pitch
+
+          pitch = tan(accel_x/accel_y)
+          roll = tan(accel_z/accel_y)
+      else  
+          pitch = aq.get("PLANE_PITCH_DEGREES")
+          roll = aq.get("PLANE_BANK_DEGREES")
         
-        pitch = aq.get("PLANE_PITCH_DEGREES")
-        roll = aq.get("PLANE_BANK_DEGREES")
+        
         
         # Display pitch and roll
         #print(f"Pitch: {pitch:.2f} degrees, Roll: {roll:.2f} degrees")
