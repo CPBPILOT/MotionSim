@@ -33,8 +33,8 @@ while True:
           accel_y = aq.get("ACCELERATION_BODY_Y") #vertival
           accel_z = aq.get("ACCELERATION_BODY_Z") #pitch
 
-          pitch = tan(accel_x/accel_y)
-          roll = tan(accel_z/accel_y)
+          pitch = math.atan(accel_x, accel_y)
+          roll = math.atan(accel_z, accel_y)
       else  
           pitch = aq.get("PLANE_PITCH_DEGREES")
           roll = aq.get("PLANE_BANK_DEGREES")
