@@ -5,7 +5,7 @@
 
 # Import necessary libraries
 import time
-import pigpio  # For generating precise GPIO waveforms
+import pigpio  # For generating precise GPIO waveforms http://abyz.me.uk/rpi/pigpio/python.html
 import pygame  # For joystick/game controller input
 import serial  # For serial communication
 # import threading  # Commented out but can be used for concurrency
@@ -31,6 +31,7 @@ float_array = [0.00, 0.00, 0.00]
 Joystick_Name = 'Mad Catz Saitek Pro Flight X-56 Rhino Stick'
 Throttle_Name = 'Mad Catz Saitek Pro Flight X-56 Rhino Throttle'
 Rudder_Name = 'Thrustmaster T-Rudder'
+#channel_lock = threading.Lock()
 
 # Initial default values for each PPM channel
 ax_1 = 1500
@@ -133,7 +134,9 @@ class X:
 
 # Initialize connected input devices
 def initialize_devices():
+    # Initialize pygame
     pygame.init()
+    # Check for connected joysticks
     if pygame.joystick.get_count() == 0:
         print("No joystick connected.")
         return None
@@ -162,33 +165,45 @@ def get_joystick_id(name):
 
 # Read joystick data (axes, buttons, hats)
 def read_joystick(joystick):
+    # Poll joystick events
     pygame.event.pump()
+    # Read axis values
     num_axes = joystick.get_numaxes()
     axes = [joystick.get_axis(i) for i in range(num_axes)]
+    # Read button states
     num_buttons = joystick.get_numbuttons()
     buttons = [joystick.get_button(i) for i in range(num_buttons)]
+    # Read hat (D-pad) states
     num_hats = joystick.get_numhats()
     hats = [joystick.get_hat(i) for i in range(num_hats)]
     return axes, buttons, hats
 
 # Read throttle data
 def read_throttle(throttle):
+    # Poll joystick events
     pygame.event.pump()
+    # Read axis values 
     num_axes = throttle.get_numaxes()
     axes = [throttle.get_axis(i) for i in range(num_axes)]
+    # Read button states
     num_buttons = throttle.get_numbuttons()
     buttons = [throttle.get_button(i) for i in range(num_buttons)]
+    # Read hat (D-pad) states
     num_hats = throttle.get_numhats()
     hats = [throttle.get_hat(i) for i in range(num_hats)]
     return axes, buttons, hats
 
 # Read rudder pedal data
 def read_pedals(pedals):
+    # Poll joystick events
     pygame.event.pump()
+    # Read axis values
     num_axes = pedals.get_numaxes()
     axes = [pedals.get_axis(i) for i in range(num_axes)]
+    # Read button states
     num_buttons = pedals.get_numbuttons()
     buttons = [pedals.get_button(i) for i in range(num_buttons)]
+    # Read hat (D-pad) states
     num_hats = pedals.get_numhats()
     hats = [pedals.get_hat(i) for i in range(num_hats)]
     return axes, buttons, hats

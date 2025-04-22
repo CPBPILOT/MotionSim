@@ -1,3 +1,4 @@
+
 #include <AccelStepper.h>           // Library for controlling stepper motors
 #include <Adafruit_NeoPixel.h>      // Library for controlling NeoPixel LEDs
 
@@ -41,6 +42,7 @@ AccelStepper x_stepper(AccelStepper::DRIVER, XSTEP_PIN, XDIR_PIN);
 AccelStepper y_stepper(AccelStepper::DRIVER, YSTEP_PIN, YDIR_PIN);
 
 // Variables to track target position and motor movement status
+//long targetPosition = 0;
 int state = 0;             // Variable to track the current state
 bool x_isMoving = false;   // Flag indicating if the X motor is moving
 bool y_isMoving = false;   // Flag indicating if the Y motor is moving
@@ -242,6 +244,14 @@ void loop() {
           // Parse the incoming data (X and Y positions)
           sscanf(incomingBuffer, "%f,%f,%f", &receivedData[0], &receivedData[1], &receivedData[2]);
 
+          // Print the received data for debugging
+          //Serial.print("Received: ");
+          //Serial.print(receivedData[0]);
+          //Serial.print(", ");
+          //Serial.print(receivedData[1]);
+          //Serial.print(", ");
+          //Serial.println(receivedData[2]);
+
           // Update positions based on received data
           x_pos = map(receivedData[0], 1000, 2000, minPos, maxPos);
           y_pos = map(receivedData[1], 2000, 1000, minPos, maxPos);
@@ -294,6 +304,15 @@ void loop() {
     
     // Print the current state for debugging purposes
     Serial.println(state);
+
+    //Serial.print(" X: ");
+    //Serial.print(x_pot_loc);
+    //Serial.print(" Y: ");
+    //Serial.print(y_pot_loc);
+    //Serial.print(" XPos    ");
+    //Serial.print(pitch_scaled);
+    //Serial.print(" Ypos    ");
+    //Serial.println(roll_scaled);
   }
 
   // Move the stepper motors to the new position
